@@ -1,3 +1,5 @@
+
+import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:hawkar_app/core/theme/app_theme.dart';
@@ -54,7 +56,7 @@ class _MainNavigationShellState extends State<MainNavigationShell> {
   final List<Widget> _screens = const [
     FeedScreen(),
     _ExplorePlaceholder(),
-    SizedBox.shrink(), // Placeholder for center post button
+    SizedBox.shrink(), // Center trigger
     _ActivityPlaceholder(),
     AuthProfileScreen(),
   ];
@@ -82,56 +84,80 @@ class _MainNavigationShellState extends State<MainNavigationShell> {
         children: _screens,
       ),
       bottomNavigationBar: Container(
-        decoration: const BoxDecoration(
-          color: HawkarColors.surfaceDark,
-          border: Border(
+        decoration: BoxDecoration(
+          color: HawkarColors.surfaceDark.withOpacity(0.95),
+          border: const Border(
             top: BorderSide(color: HawkarColors.surfaceBorder, width: 0.8),
           ),
         ),
-        child: BottomNavigationBar(
-          currentIndex: _currentIndex,
-          onTap: _onBottomNavTapped,
-          backgroundColor: HawkarColors.surfaceDark,
-          selectedItemColor: HawkarColors.primaryEmerald,
-          unselectedItemColor: HawkarColors.textMuted,
-          selectedFontSize: 11,
-          unselectedFontSize: 11,
-          type: BottomNavigationBarType.fixed,
-          elevation: 0,
-          items: [
-            const BottomNavigationBarItem(
-              icon: Icon(Icons.home_filled),
-              label: "ڕووبەر",
+        child: SafeArea(
+          top: false,
+          child: Padding(
+            padding: const EdgeInsets.symmetric(vertical: 4),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: [
+                _navItem(0, Icons.home_rounded, Icons.home_outlined, "ڕووبەر"),
+                _navItem(1, Icons.explore_rounded, Icons.explore_outlined, "گەڕان"),
+                _centerCreateButton(),
+                _navItem(3, Icons.handshake_rounded, Icons.handshake_outlined, "هاوکارییەکان"),
+                _navItem(4, Icons.person_rounded, Icons.person_outline_rounded, "هەژمار"),
+              ],
             ),
-            const BottomNavigationBarItem(
-              icon: Icon(Icons.explore_outlined),
-              label: "گەڕان",
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget _centerCreateButton() {
+    return GestureDetector(
+      onTap: () => _onBottomNavTapped(2),
+      child: Container(
+        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 7),
+        decoration: BoxDecoration(
+          gradient: HawkarColors.emeraldGradient,
+          borderRadius: BorderRadius.circular(14),
+          boxShadow: [
+            BoxShadow(
+              color: HawkarColors.primaryEmerald.withOpacity(0.45),
+              blurRadius: 10,
+              offset: const Offset(0, 2),
             ),
-            BottomNavigationBarItem(
-              icon: Container(
-                padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 6),
-                decoration: BoxDecoration(
-                  gradient: HawkarColors.emeraldGradient,
-                  borderRadius: BorderRadius.circular(12),
-                  boxShadow: [
-                    BoxShadow(
-                      color: HawkarColors.primaryEmerald.withOpacity(0.4),
-                      blurRadius: 8,
-                      offset: const Offset(0, 2),
-                    ),
-                  ],
-                ),
-                child: const Icon(Icons.add, color: Colors.black, size: 20),
+          ],
+        ),
+        child: const Icon(
+          Icons.add_rounded,
+          color: Colors.black,
+          size: 22,
+        ),
+      ),
+    );
+  }
+
+  Widget _navItem(int index, IconData activeIcon, IconData inactiveIcon, String label) {
+    final isSelected = _currentIndex == index;
+    return GestureDetector(
+      behavior: HitTestBehavior.opaque,
+      onTap: () => _onBottomNavTapped(index),
+      child: SizedBox(
+        width: 60,
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Icon(
+              isSelected ? activeIcon : inactiveIcon,
+              color: isSelected ? HawkarColors.primaryEmerald : HawkarColors.textMuted,
+              size: 24,
+            ),
+            const SizedBox(height: 3),
+            Text(
+              label,
+              style: TextStyle(
+                color: isSelected ? HawkarColors.primaryEmerald : HawkarColors.textMuted,
+                fontSize: 10.5,
+                fontWeight: isSelected ? FontWeight.w800 : FontWeight.w500,
               ),
-              label: "",
-            ),
-            const BottomNavigationBarItem(
-              icon: Icon(Icons.handshake_outlined),
-              label: "هاوکارییەکان",
-            ),
-            const BottomNavigationBarItem(
-              icon: Icon(Icons.person_outline),
-              label: "هەژمار",
             ),
           ],
         ),
@@ -146,23 +172,53 @@ class _ExplorePlaceholder extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text("گەڕان بەپێی شار و جۆر")),
+      backgroundColor: HawkarColors.bgDark,
+      appBar: AppBar(
+        title: const Text("گەڕان بەپێی شار و جۆر"),
+      ),
       body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Icon(Icons.map_outlined, size: 64, color: HawkarColors.primaryEmerald.withOpacity(0.6)),
-            const SizedBox(height: 16),
-            const Text(
-              "نەخشەی هاوکاری لە کوردستان",
-              style: TextStyle(color: HawkarColors.textPrimary, fontSize: 18, fontWeight: FontWeight.bold),
-            ),
-            const SizedBox(height: 8),
-            const Text(
-              "هەولێر • سلێمانی • دهۆک • کەرکووک • هەڵەبجە",
-              style: TextStyle(color: HawkarColors.textMuted, fontSize: 14),
-            ),
-          ],
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 24),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Container(
+                width: 90,
+                height: 90,
+                decoration: BoxDecoration(
+                  color: HawkarColors.surfaceElevated,
+                  borderRadius: BorderRadius.circular(24),
+                  border: Border.all(color: HawkarColors.surfaceBorder),
+                ),
+                child: const Center(
+                  child: Icon(
+                    Icons.map_rounded,
+                    size: 44,
+                    color: HawkarColors.primaryEmerald,
+                  ),
+                ),
+              ),
+              const SizedBox(height: 20),
+              const Text(
+                "نەخشەی دەستگیری و هاوکاری لە کوردستان",
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  color: HawkarColors.textPrimary,
+                  fontSize: 18,
+                  fontWeight: FontWeight.w800,
+                ),
+              ),
+              const SizedBox(height: 10),
+              const Text(
+                "هەولێر • سلێمانی • دهۆک • کەرکووک • هەڵەبجە • زاخۆ",
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  color: HawkarColors.textSecondary,
+                  fontSize: 13.5,
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );
@@ -175,23 +231,54 @@ class _ActivityPlaceholder extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text("چالاکی و بەشداریکردنەکانم")),
+      backgroundColor: HawkarColors.bgDark,
+      appBar: AppBar(
+        title: const Text("چالاکی و بەشداریکردنەکانم"),
+      ),
       body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Icon(Icons.volunteer_activism_outlined, size: 64, color: HawkarColors.accentGold.withOpacity(0.6)),
-            const SizedBox(height: 16),
-            const Text(
-              "تۆ هێشتا دەستگیرۆیی هیچ کەسێکت تۆمار نەکردووە",
-              style: TextStyle(color: HawkarColors.textPrimary, fontSize: 16, fontWeight: FontWeight.bold),
-            ),
-            const SizedBox(height: 8),
-            const Text(
-              "سەیری ڕووبەری ڤیدیۆکان بکە و دەستێک بەخشندە بە",
-              style: TextStyle(color: HawkarColors.textMuted, fontSize: 13),
-            ),
-          ],
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 24),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Container(
+                width: 90,
+                height: 90,
+                decoration: BoxDecoration(
+                  color: HawkarColors.surfaceElevated,
+                  borderRadius: BorderRadius.circular(24),
+                  border: Border.all(color: HawkarColors.surfaceBorder),
+                ),
+                child: const Center(
+                  child: Icon(
+                    Icons.volunteer_activism_rounded,
+                    size: 44,
+                    color: HawkarColors.accentGold,
+                  ),
+                ),
+              ),
+              const SizedBox(height: 20),
+              const Text(
+                "تۆ هێشتا دەستگیرۆیی هیچ داواکارییەکت نەکردووە",
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  color: HawkarColors.textPrimary,
+                  fontSize: 17,
+                  fontWeight: FontWeight.w800,
+                ),
+              ),
+              const SizedBox(height: 10),
+              const Text(
+                "سەیری ڕووبەری ڤیدیۆکان بکە و دەستێکی خێر و بەخشندە بە بۆ هاوڵاتییانی کوردستان",
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  color: HawkarColors.textSecondary,
+                  fontSize: 13.5,
+                  height: 1.5,
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );

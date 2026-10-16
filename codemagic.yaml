@@ -13,7 +13,7 @@ workflows:
           flutter packages pub get
       - name: Build iOS Application (Release)
         script: |
-          flutter build ios --release --no-codesign
+          flutter build ios --release --no-codesign --no-tree-shake-icons
       - name: Package into IPA
         script: |
           mkdir -p Payload

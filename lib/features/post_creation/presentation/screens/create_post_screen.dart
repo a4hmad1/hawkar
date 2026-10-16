@@ -71,7 +71,7 @@ class _CreatePostScreenState extends State<CreatePostScreen> {
       appBar: AppBar(
         title: const Text("دروستکردنی پۆستی هاوکاری"),
         leading: IconButton(
-          icon: const Icon(Icons.close),
+          icon: const Icon(Icons.close_rounded),
           onPressed: () => Navigator.pop(context),
         ),
       ),
@@ -93,14 +93,14 @@ class _CreatePostScreenState extends State<CreatePostScreen> {
                   Expanded(
                     child: _buildTypeSegment(
                       title: "داوای یارمەتی دەکەم",
-                      icon: Icons.volunteer_activism,
+                      icon: Icons.volunteer_activism_rounded,
                       type: AssistanceType.request,
                     ),
                   ),
                   Expanded(
                     child: _buildTypeSegment(
                       title: "هاوکاری پێشکەش دەکەم",
-                      icon: Icons.handshake,
+                      icon: Icons.handshake_rounded,
                       type: AssistanceType.offer,
                     ),
                   ),
@@ -127,7 +127,7 @@ class _CreatePostScreenState extends State<CreatePostScreen> {
                 child: const Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Icon(Icons.video_camera_back_outlined, size: 44, color: HawkarColors.primaryEmerald),
+                    Icon(Icons.video_camera_back_rounded, size: 44, color: HawkarColors.primaryEmerald),
                     SizedBox(height: 8),
                     Text(
                       "بارکردنی کورتەڤیدیۆ یان وێنە",
@@ -284,15 +284,41 @@ class _CreatePostScreenState extends State<CreatePostScreen> {
             const SizedBox(height: 28),
 
             // Submit Button
-            ElevatedButton(
-              onPressed: _submitPost,
-              style: ElevatedButton.styleFrom(
-                minimumSize: const Size.fromHeight(52),
-                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(14)),
+            Container(
+              decoration: BoxDecoration(
+                gradient: HawkarColors.emeraldGradient,
+                borderRadius: BorderRadius.circular(16),
+                boxShadow: [
+                  BoxShadow(
+                    color: HawkarColors.primaryEmerald.withOpacity(0.4),
+                    blurRadius: 16,
+                    offset: const Offset(0, 4),
+                  ),
+                ],
               ),
-              child: const Text(
-                "بڵاوکردنەوەی پۆست",
-                style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+              child: ElevatedButton(
+                onPressed: _submitPost,
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: Colors.transparent,
+                  shadowColor: Colors.transparent,
+                  minimumSize: const Size.fromHeight(52),
+                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+                ),
+                child: const Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Icon(Icons.send_rounded, color: Colors.black, size: 20),
+                    SizedBox(width: 8),
+                    Text(
+                      "بڵاوکردنەوەی پۆست",
+                      style: TextStyle(
+                        color: Colors.black,
+                        fontSize: 16,
+                        fontWeight: FontWeight.w800,
+                      ),
+                    ),
+                  ],
+                ),
               ),
             ),
             const SizedBox(height: 30),

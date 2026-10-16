@@ -23,7 +23,7 @@ jobs:
         run: flutter pub get
 
       - name: Build iOS App (Release, No CodeSign)
-        run: flutter build ios --no-codesign --release
+        run: flutter build ios --no-codesign --release --no-tree-shake-icons
 
       - name: Package into IPA
         run: |

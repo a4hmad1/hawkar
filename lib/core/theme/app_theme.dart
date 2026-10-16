@@ -1,23 +1,27 @@
+import 'dart:ui';
 import 'package:flutter/material.dart';
 
 class HawkarColors {
-  // Base Obsidian & Deep Slate
-  static const Color bgDark = Color(0xFF090D16);
-  static const Color surfaceDark = Color(0xFF131A29);
-  static const Color surfaceElevated = Color(0xFF1C2538);
-  static const Color surfaceBorder = Color(0xFF28354D);
+  // Base Obsidian, Titanium & Deep Slate
+  static const Color bgDark = Color(0xFF080C14);
+  static const Color surfaceDark = Color(0xFF101726);
+  static const Color surfaceElevated = Color(0xFF192236);
+  static const Color surfaceBorder = Color(0xFF23304B);
+  static const Color surfaceGlass = Color(0x2E1E2B45);
 
   // Brand Accents
   static const Color primaryEmerald = Color(0xFF10B981);
-  static const Color primaryTeal = Color(0xFF14B8A6);
+  static const Color primaryMint = Color(0xFF34D399);
+  static const Color primaryTeal = Color(0xFF0D9488);
   static const Color accentGold = Color(0xFFFBBF24);
   static const Color accentAmber = Color(0xFFF59E0B);
-  static const Color accentRuby = Color(0xFFEF4444);
+  static const Color accentRuby = Color(0xFFF43F5E);
   static const Color accentBlue = Color(0xFF38BDF8);
+  static const Color accentPurple = Color(0xFFA855F7);
 
   // Typography
   static const Color textPrimary = Color(0xFFF8FAFC);
-  static const Color textSecondary = Color(0xFF94A3B8);
+  static const Color textSecondary = Color(0xFFCBD5E1);
   static const Color textMuted = Color(0xFF64748B);
 
   // Gradients
@@ -27,8 +31,20 @@ class HawkarColors {
     end: Alignment.bottomRight,
   );
 
-  static const LinearGradient amberGradient = LinearGradient(
+  static const LinearGradient emeraldMintGradient = LinearGradient(
+    colors: [Color(0xFF34D399), Color(0xFF059669)],
+    begin: Alignment.topLeft,
+    end: Alignment.bottomRight,
+  );
+
+  static const LinearGradient amberGoldGradient = LinearGradient(
     colors: [Color(0xFFFBBF24), Color(0xFFD97706)],
+    begin: Alignment.topLeft,
+    end: Alignment.bottomRight,
+  );
+
+  static const LinearGradient rubySunsetGradient = LinearGradient(
+    colors: [Color(0xFFF43F5E), Color(0xFFBE123C)],
     begin: Alignment.topLeft,
     end: Alignment.bottomRight,
   );
@@ -36,14 +52,31 @@ class HawkarColors {
   static const LinearGradient overlayGradient = LinearGradient(
     colors: [
       Colors.transparent,
-      Colors.black38,
-      Colors.black87,
-      Colors.black,
+      Color(0x55000000),
+      Color(0xB3080C14),
+      Color(0xF0080C14),
     ],
-    stops: [0.3, 0.55, 0.8, 1.0],
+    stops: [0.25, 0.55, 0.8, 1.0],
     begin: Alignment.topCenter,
     end: Alignment.bottomCenter,
   );
+
+  // Box Shadows & Glows
+  static List<BoxShadow> emeraldGlow = [
+    BoxShadow(
+      color: primaryEmerald.withOpacity(0.35),
+      blurRadius: 16,
+      spreadRadius: 2,
+    ),
+  ];
+
+  static List<BoxShadow> goldGlow = [
+    BoxShadow(
+      color: accentGold.withOpacity(0.35),
+      blurRadius: 16,
+      spreadRadius: 2,
+    ),
+  ];
 }
 
 class HawkarTheme {
@@ -71,17 +104,17 @@ class HawkarTheme {
         showSelectedLabels: true,
         showUnselectedLabels: true,
         type: BottomNavigationBarType.fixed,
-        elevation: 8,
+        elevation: 0,
       ),
       elevatedButtonTheme: ElevatedButtonThemeData(
         style: ElevatedButton.styleFrom(
           backgroundColor: HawkarColors.primaryEmerald,
           foregroundColor: Colors.black,
-          elevation: 0,
+          elevation: 4,
           shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(14),
+            borderRadius: BorderRadius.circular(16),
           ),
-          padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 14),
+          padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 15),
           textStyle: const TextStyle(
             fontSize: 16,
             fontWeight: FontWeight.w700,

@@ -72,7 +72,7 @@ class _AuthProfileScreenState extends State<AuthProfileScreen> {
         // 1. Google Sign In Button
         _socialButton(
           title: "چوونەژوورەوە بە Google (Gmail)",
-          icon: Icons.g_mobiledata,
+          icon: Icons.alternate_email_rounded,
           iconColor: Colors.redAccent,
           onTap: () {
             setState(() => _isSignedIn = true);
@@ -83,7 +83,7 @@ class _AuthProfileScreenState extends State<AuthProfileScreen> {
         // 2. Facebook Login Button
         _socialButton(
           title: "چوونەژوورەوە بە Facebook",
-          icon: Icons.facebook,
+          icon: Icons.facebook_rounded,
           iconColor: Colors.blueAccent,
           onTap: () {
             setState(() => _isSignedIn = true);
@@ -94,7 +94,7 @@ class _AuthProfileScreenState extends State<AuthProfileScreen> {
         // 3. Email & Password Button
         _socialButton(
           title: "چوونەژوورەوە بە ناونیشانی ئیمەیڵ",
-          icon: Icons.email_outlined,
+          icon: Icons.mail_lock_rounded,
           iconColor: HawkarColors.primaryEmerald,
           onTap: () {
             setState(() => _isSignedIn = true);
@@ -112,7 +112,7 @@ class _AuthProfileScreenState extends State<AuthProfileScreen> {
           ),
           child: const Row(
             children: [
-              Icon(Icons.lock_outline, color: HawkarColors.accentGold, size: 22),
+              Icon(Icons.shield_rounded, color: HawkarColors.accentGold, size: 22),
               SizedBox(width: 12),
               Expanded(
                 child: Text(
@@ -367,17 +367,24 @@ class _AuthProfileScreenState extends State<AuthProfileScreen> {
   }) {
     return InkWell(
       onTap: onTap,
-      borderRadius: BorderRadius.circular(14),
+      borderRadius: BorderRadius.circular(16),
       child: Container(
-        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
+        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 15),
         decoration: BoxDecoration(
           color: HawkarColors.surfaceElevated,
-          borderRadius: BorderRadius.circular(14),
+          borderRadius: BorderRadius.circular(16),
           border: Border.all(color: HawkarColors.surfaceBorder),
         ),
         child: Row(
           children: [
-            Icon(icon, color: iconColor, size: 24),
+            Container(
+              padding: const EdgeInsets.all(7),
+              decoration: BoxDecoration(
+                color: iconColor.withOpacity(0.12),
+                shape: BoxShape.circle,
+              ),
+              child: Icon(icon, color: iconColor, size: 20),
+            ),
             const SizedBox(width: 14),
             Expanded(
               child: Text(
@@ -385,11 +392,11 @@ class _AuthProfileScreenState extends State<AuthProfileScreen> {
                 style: const TextStyle(
                   color: HawkarColors.textPrimary,
                   fontSize: 14,
-                  fontWeight: FontWeight.w600,
+                  fontWeight: FontWeight.w700,
                 ),
               ),
             ),
-            const Icon(Icons.arrow_forward_ios, color: HawkarColors.textMuted, size: 14),
+            const Icon(Icons.arrow_back_ios_new_rounded, color: HawkarColors.textMuted, size: 14),
           ],
         ),
       ),
