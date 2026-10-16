@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import '../../../../core/theme/app_theme.dart';
-import '../../data/datasources/mock_posts.dart';
-import '../../domain/models/assistance_post.dart';
-import '../widgets/assistance_post_card.dart';
+import 'package:hawkar_app/core/theme/app_theme.dart';
+import 'package:hawkar_app/features/feed/data/datasources/mock_posts.dart';
+import 'package:hawkar_app/features/feed/domain/models/assistance_post.dart';
+import 'package:hawkar_app/features/feed/presentation/widgets/assistance_post_card.dart';
 
 class FeedScreen extends StatefulWidget {
   const FeedScreen({super.key});

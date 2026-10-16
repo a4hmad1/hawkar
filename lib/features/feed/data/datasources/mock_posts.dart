@@ -1,4 +1,4 @@
-import '../../domain/models/assistance_post.dart';
+import 'package:hawkar_app/features/feed/domain/models/assistance_post.dart';
 
 class MockPostsDataSource {
   static List<AssistancePost> getSamplePosts() {

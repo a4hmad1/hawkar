@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import '../../../../core/localization/kurdish_strings.dart';
-import '../../../../core/theme/app_theme.dart';
-import '../../../../main.dart';
+import 'package:hawkar_app/core/localization/kurdish_strings.dart';
+import 'package:hawkar_app/core/theme/app_theme.dart';
+import 'package:hawkar_app/main.dart';
 
 class OnboardingScreen extends StatefulWidget {
   const OnboardingScreen({super.key});

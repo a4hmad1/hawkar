@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
-import 'core/theme/app_theme.dart';
-import 'features/auth/presentation/screens/auth_profile_screen.dart';
-import 'features/feed/presentation/screens/feed_screen.dart';
-import 'features/onboarding/presentation/screens/onboarding_screen.dart';
-import 'features/post_creation/presentation/screens/create_post_screen.dart';
+import 'package:hawkar_app/core/theme/app_theme.dart';
+import 'package:hawkar_app/features/auth/presentation/screens/auth_profile_screen.dart';
+import 'package:hawkar_app/features/feed/presentation/screens/feed_screen.dart';
+import 'package:hawkar_app/features/onboarding/presentation/screens/onboarding_screen.dart';
+import 'package:hawkar_app/features/post_creation/presentation/screens/create_post_screen.dart';
 
 void main() {
   runApp(const HawkarApp());

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import '../../../../core/theme/app_theme.dart';
-import '../../domain/models/assistance_post.dart';
-import 'assistance_details_sheet.dart';
+import 'package:hawkar_app/core/theme/app_theme.dart';
+import 'package:hawkar_app/features/feed/domain/models/assistance_post.dart';
+import 'package:hawkar_app/features/feed/presentation/widgets/assistance_details_sheet.dart';
 
 class AssistancePostCard extends StatefulWidget {
   final AssistancePost post;

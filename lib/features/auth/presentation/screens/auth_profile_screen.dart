@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import '../../../../core/theme/app_theme.dart';
-import '../../feed/domain/models/assistance_post.dart';
+import 'package:hawkar_app/core/theme/app_theme.dart';
+import 'package:hawkar_app/features/feed/domain/models/assistance_post.dart';
 
 class AuthProfileScreen extends StatefulWidget {
   final bool isGuest;
