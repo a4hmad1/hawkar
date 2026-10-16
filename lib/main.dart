@@ -19,10 +19,9 @@ class HawkarApp extends StatelessWidget {
       title: 'هاوکار - پلاتفۆرمی هاوکاری کۆمەڵایەتی',
       debugShowCheckedModeBanner: false,
       theme: HawkarTheme.darkTheme,
-      // Kurdish Sorani RTL Directionality & Localization
-      locale: const Locale('ckb', 'IQ'), // Central Kurdish / Sorani
+      // Native Kurdish RTL Directionality & Localization
+      locale: const Locale('ar', 'IQ'),
       supportedLocales: const [
-        Locale('ckb', 'IQ'),
         Locale('ar', 'IQ'),
         Locale('en', 'US'),
       ],
