@@ -10,35 +10,46 @@ class HawkarColors {
   static const Color surfaceGlass = Color(0x2E1E2B45);
 
   // Brand Accents
-  static const Color primaryEmerald = Color(0xFF10B981);
-  static const Color primaryMint = Color(0xFF34D399);
-  static const Color primaryTeal = Color(0xFF0D9488);
-  static const Color accentGold = Color(0xFFFBBF24);
-  static const Color accentAmber = Color(0xFFF59E0B);
+  static const Color primaryEmerald = Color(0xFF659B28);
+  static const Color primaryMint = Color(0xFF8DC63F);
+  static const Color primaryTeal = Color(0xFF388E3C);
+  static const Color accentGold = Color(0xFFF3E7C4);
+  static const Color accentAmber = Color(0xFFD6C088);
   static const Color accentRuby = Color(0xFFF43F5E);
   static const Color accentBlue = Color(0xFF38BDF8);
   static const Color accentPurple = Color(0xFFA855F7);
 
+  // Logo Brand Colors
+  static const Color logoBgOlive = Color(0xFF24331C);
+  static const Color logoLeafGreen = Color(0xFF72A832);
+  static const Color logoChampagne = Color(0xFFF5EAC9);
+
   // Typography
   static const Color textPrimary = Color(0xFFF8FAFC);
   static const Color textSecondary = Color(0xFFCBD5E1);
-  static const Color textMuted = Color(0xFF64748B);
+  static const Color textMuted = Color(0xFF94A3B8);
 
   // Gradients
+  static const LinearGradient brandGradient = LinearGradient(
+    colors: [Color(0xFF8DC63F), Color(0xFF558B2F)],
+    begin: Alignment.topLeft,
+    end: Alignment.bottomRight,
+  );
+
   static const LinearGradient emeraldGradient = LinearGradient(
-    colors: [Color(0xFF10B981), Color(0xFF059669)],
+    colors: [Color(0xFF72A832), Color(0xFF436E1D)],
     begin: Alignment.topLeft,
     end: Alignment.bottomRight,
   );
 
   static const LinearGradient emeraldMintGradient = LinearGradient(
-    colors: [Color(0xFF34D399), Color(0xFF059669)],
+    colors: [Color(0xFF8DC63F), Color(0xFF558B2F)],
     begin: Alignment.topLeft,
     end: Alignment.bottomRight,
   );
 
   static const LinearGradient amberGoldGradient = LinearGradient(
-    colors: [Color(0xFFFBBF24), Color(0xFFD97706)],
+    colors: [Color(0xFFF5EAC9), Color(0xFFD6C088)],
     begin: Alignment.topLeft,
     end: Alignment.bottomRight,
   );

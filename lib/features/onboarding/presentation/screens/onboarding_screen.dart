@@ -5,20 +5,18 @@ import 'package:hawkar_app/core/theme/app_theme.dart';
 import 'package:hawkar_app/main.dart';
 
 class OnboardingPageData {
-  final IconData icon;
   final String badge;
   final String title;
   final String desc;
   final List<Color> gradient;
-  final String heroTag;
+  final Widget heroWidget;
 
   const OnboardingPageData({
-    required this.icon,
     required this.badge,
     required this.title,
     required this.desc,
     required this.gradient,
-    required this.heroTag,
+    required this.heroWidget,
   });
 }
 
@@ -33,40 +31,46 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
   final PageController _controller = PageController();
   int _currentPage = 0;
 
-  static const List<OnboardingPageData> _pages = [
-    OnboardingPageData(
-      icon: Icons.volunteer_activism_rounded,
-      badge: "دەستپێکی هاوکاری کۆمەڵایەتی",
-      title: KurdishStrings.onb1Title,
-      desc: KurdishStrings.onb1Desc,
-      gradient: [HawkarColors.primaryEmerald, HawkarColors.primaryMint],
-      heroTag: "onb_hero_1",
-    ),
-    OnboardingPageData(
-      icon: Icons.videocam_rounded,
-      badge: "دەنگی خۆت بگەیەنە بە ڤیدیۆ",
-      title: KurdishStrings.onb2Title,
-      desc: KurdishStrings.onb2Desc,
-      gradient: [HawkarColors.accentGold, HawkarColors.accentAmber],
-      heroTag: "onb_hero_2",
-    ),
-    OnboardingPageData(
-      icon: Icons.handshake_rounded,
-      badge: "دەستی دەستگیرۆیی درێژ بکە",
-      title: KurdishStrings.onb3Title,
-      desc: KurdishStrings.onb3Desc,
-      gradient: [HawkarColors.accentBlue, HawkarColors.primaryEmerald],
-      heroTag: "onb_hero_3",
-    ),
-    OnboardingPageData(
-      icon: Icons.verified_user_rounded,
-      badge: "پارێزراو، متمانەپێکراو و بەڕێز",
-      title: KurdishStrings.onb4Title,
-      desc: KurdishStrings.onb4Desc,
-      gradient: [HawkarColors.accentPurple, HawkarColors.primaryEmerald],
-      heroTag: "onb_hero_4",
-    ),
-  ];
+  late final List<OnboardingPageData> _pages;
+
+  @override
+  void initState() {
+    super.initState();
+    _pages = [
+      // 1. Real Brand Logo
+      OnboardingPageData(
+        badge: "دەستپێکی هاوکاری کۆمەڵایەتی",
+        title: KurdishStrings.onb1Title,
+        desc: KurdishStrings.onb1Desc,
+        gradient: [HawkarColors.primaryMint, HawkarColors.primaryEmerald],
+        heroWidget: _buildLogoHeroCard(),
+      ),
+      // 2. Video Voice
+      OnboardingPageData(
+        badge: "دەنگی خۆت بگەیەنە بە ڤیدیۆ",
+        title: KurdishStrings.onb2Title,
+        desc: KurdishStrings.onb2Desc,
+        gradient: [HawkarColors.accentGold, HawkarColors.accentAmber],
+        heroWidget: _buildVideoHeroCard(),
+      ),
+      // 3. Helping Hands
+      OnboardingPageData(
+        badge: "دەستی دەستگیرۆیی درێژ بکە",
+        title: KurdishStrings.onb3Title,
+        desc: KurdishStrings.onb3Desc,
+        gradient: [HawkarColors.primaryMint, HawkarColors.accentBlue],
+        heroWidget: _buildCommunityHeroCard(),
+      ),
+      // 4. Trust & Safety
+      OnboardingPageData(
+        badge: "پارێزراو، متمانەپێکراو و بەڕێز",
+        title: KurdishStrings.onb4Title,
+        desc: KurdishStrings.onb4Desc,
+        gradient: [HawkarColors.accentBlue, HawkarColors.primaryEmerald],
+        heroWidget: _buildTrustHeroCard(),
+      ),
+    ];
+  }
 
   void _finishOnboarding() {
     Navigator.of(context).pushReplacement(
@@ -75,6 +79,195 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
         transitionsBuilder: (context, animation, secondaryAnimation, child) {
           return FadeTransition(opacity: animation, child: child);
         },
+      ),
+    );
+  }
+
+  // 1. Real Logo Hero Card
+  Widget _buildLogoHeroCard() {
+    return Container(
+      width: 190,
+      height: 190,
+      decoration: BoxDecoration(
+        shape: BoxShape.circle,
+        gradient: RadialGradient(
+          colors: [
+            HawkarColors.primaryMint.withOpacity(0.35),
+            Colors.transparent,
+          ],
+        ),
+      ),
+      child: Center(
+        child: Container(
+          width: 140,
+          height: 140,
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(36),
+            border: Border.all(
+              color: HawkarColors.primaryMint.withOpacity(0.6),
+              width: 2.5,
+            ),
+            boxShadow: [
+              BoxShadow(
+                color: HawkarColors.primaryEmerald.withOpacity(0.4),
+                blurRadius: 30,
+                spreadRadius: 4,
+                offset: const Offset(0, 10),
+              ),
+            ],
+          ),
+          child: ClipRRect(
+            borderRadius: BorderRadius.circular(33.5),
+            child: Image.asset(
+              'assets/images/logo.png',
+              fit: BoxFit.cover,
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+
+  // 2. Video Storytelling Hero Card
+  Widget _buildVideoHeroCard() {
+    return Container(
+      width: 180,
+      height: 180,
+      decoration: BoxDecoration(
+        color: HawkarColors.surfaceElevated,
+        borderRadius: BorderRadius.circular(36),
+        border: Border.all(
+          color: HawkarColors.accentAmber.withOpacity(0.6),
+          width: 2,
+        ),
+        boxShadow: [
+          BoxShadow(
+            color: HawkarColors.accentAmber.withOpacity(0.3),
+            blurRadius: 28,
+            offset: const Offset(0, 8),
+          ),
+        ],
+      ),
+      child: Stack(
+        alignment: Alignment.center,
+        children: [
+          Container(
+            width: 100,
+            height: 100,
+            decoration: BoxDecoration(
+              gradient: HawkarColors.amberGoldGradient,
+              shape: BoxShape.circle,
+            ),
+            child: const Center(
+              child: Icon(
+                Icons.videocam_rounded,
+                size: 50,
+                color: Colors.black,
+              ),
+            ),
+          ),
+          Positioned(
+            top: 14,
+            right: 14,
+            child: Container(
+              padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
+              decoration: BoxDecoration(
+                color: HawkarColors.accentRuby,
+                borderRadius: BorderRadius.circular(10),
+              ),
+              child: const Row(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  CircleAvatar(radius: 3, backgroundColor: Colors.white),
+                  SizedBox(width: 4),
+                  Text("REC", style: TextStyle(color: Colors.white, fontSize: 9, fontWeight: FontWeight.bold)),
+                ],
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  // 3. Collaborative Community Hero Card
+  Widget _buildCommunityHeroCard() {
+    return Container(
+      width: 180,
+      height: 180,
+      decoration: BoxDecoration(
+        color: HawkarColors.surfaceElevated,
+        borderRadius: BorderRadius.circular(36),
+        border: Border.all(
+          color: HawkarColors.primaryMint.withOpacity(0.6),
+          width: 2,
+        ),
+        boxShadow: [
+          BoxShadow(
+            color: HawkarColors.primaryEmerald.withOpacity(0.35),
+            blurRadius: 28,
+            offset: const Offset(0, 8),
+          ),
+        ],
+      ),
+      child: Center(
+        child: Container(
+          width: 100,
+          height: 100,
+          decoration: BoxDecoration(
+            gradient: HawkarColors.brandGradient,
+            shape: BoxShape.circle,
+          ),
+          child: const Center(
+            child: Icon(
+              Icons.handshake_rounded,
+              size: 52,
+              color: Colors.black,
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+
+  // 4. Trust & Security Hero Card
+  Widget _buildTrustHeroCard() {
+    return Container(
+      width: 180,
+      height: 180,
+      decoration: BoxDecoration(
+        color: HawkarColors.surfaceElevated,
+        borderRadius: BorderRadius.circular(36),
+        border: Border.all(
+          color: HawkarColors.accentBlue.withOpacity(0.6),
+          width: 2,
+        ),
+        boxShadow: [
+          BoxShadow(
+            color: HawkarColors.accentBlue.withOpacity(0.3),
+            blurRadius: 28,
+            offset: const Offset(0, 8),
+          ),
+        ],
+      ),
+      child: Center(
+        child: Container(
+          width: 100,
+          height: 100,
+          decoration: const BoxDecoration(
+            gradient: LinearGradient(
+              colors: [HawkarColors.accentBlue, HawkarColors.primaryEmerald],
+            ),
+            shape: BoxShape.circle,
+          ),
+          child: const Center(
+            child: Icon(
+              Icons.verified_user_rounded,
+              size: 52,
+              color: Colors.black,
+            ),
+          ),
+        ),
       ),
     );
   }
@@ -130,57 +323,39 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      // Hawkar Logo Chip
-                      Container(
-                        padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
-                        decoration: BoxDecoration(
-                          color: HawkarColors.surfaceGlass,
-                          borderRadius: BorderRadius.circular(16),
-                          border: Border.all(color: HawkarColors.surfaceBorder),
-                          boxShadow: [
-                            BoxShadow(
-                              color: Colors.black.withOpacity(0.2),
-                              blurRadius: 10,
+                      // Hawkar Official Logo & Title
+                      Row(
+                        children: [
+                          ClipRRect(
+                            borderRadius: BorderRadius.circular(10),
+                            child: Image.asset(
+                              'assets/images/logo.png',
+                              width: 32,
+                              height: 32,
+                              fit: BoxFit.cover,
                             ),
-                          ],
-                        ),
-                        child: Row(
-                          mainAxisSize: MainAxisSize.min,
-                          children: [
-                            Container(
-                              padding: const EdgeInsets.all(5),
-                              decoration: const BoxDecoration(
-                                color: HawkarColors.primaryEmerald,
-                                shape: BoxShape.circle,
-                              ),
-                              child: const Icon(
-                                Icons.handshake_rounded,
-                                color: Colors.black,
-                                size: 14,
-                              ),
+                          ),
+                          const SizedBox(width: 10),
+                          const Text(
+                            KurdishStrings.appName,
+                            style: TextStyle(
+                              color: HawkarColors.textPrimary,
+                              fontSize: 18,
+                              fontWeight: FontWeight.w900,
+                              letterSpacing: 0.5,
                             ),
-                            const SizedBox(width: 8),
-                            const Text(
-                              KurdishStrings.appName,
-                              style: TextStyle(
-                                color: HawkarColors.textPrimary,
-                                fontSize: 16,
-                                fontWeight: FontWeight.w900,
-                                letterSpacing: 0.5,
-                              ),
-                            ),
-                          ],
-                        ),
+                          ),
+                        ],
                       ),
 
                       // Skip Button
                       TextButton(
                         onPressed: _finishOnboarding,
                         style: TextButton.styleFrom(
-                          padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 8),
-                          backgroundColor: Colors.white.withOpacity(0.04),
+                          padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 6),
+                          backgroundColor: Colors.white.withOpacity(0.06),
                           shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(12),
+                            borderRadius: BorderRadius.circular(14),
                           ),
                         ),
                         child: const Text(
@@ -212,61 +387,18 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            // 3D Glassmorphic Icon Showcase
-                            Container(
-                              width: 170,
-                              height: 170,
-                              decoration: BoxDecoration(
-                                shape: BoxShape.circle,
-                                gradient: RadialGradient(
-                                  colors: [
-                                    page.gradient[0].withOpacity(0.3),
-                                    page.gradient[1].withOpacity(0.05),
-                                    Colors.transparent,
-                                  ],
-                                  radius: 0.95,
-                                ),
-                              ),
-                              child: Center(
-                                child: Container(
-                                  width: 110,
-                                  height: 110,
-                                  decoration: BoxDecoration(
-                                    color: HawkarColors.surfaceElevated,
-                                    borderRadius: BorderRadius.circular(32),
-                                    border: Border.all(
-                                      color: page.gradient[0].withOpacity(0.65),
-                                      width: 2,
-                                    ),
-                                    boxShadow: [
-                                      BoxShadow(
-                                        color: page.gradient[0].withOpacity(0.3),
-                                        blurRadius: 28,
-                                        spreadRadius: 4,
-                                        offset: const Offset(0, 8),
-                                      ),
-                                    ],
-                                  ),
-                                  child: Center(
-                                    child: Icon(
-                                      page.icon,
-                                      size: 52,
-                                      color: page.gradient[0],
-                                    ),
-                                  ),
-                                ),
-                              ),
-                            ),
+                            // Rich Visual Hero Card
+                            page.heroWidget,
                             const SizedBox(height: 36),
 
                             // Badge Pill
                             Container(
                               padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 7),
                               decoration: BoxDecoration(
-                                color: page.gradient[0].withOpacity(0.12),
+                                color: page.gradient[0].withOpacity(0.14),
                                 borderRadius: BorderRadius.circular(24),
                                 border: Border.all(
-                                  color: page.gradient[0].withOpacity(0.4),
+                                  color: page.gradient[0].withOpacity(0.45),
                                   width: 1,
                                 ),
                               ),
@@ -274,7 +406,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                                 page.badge,
                                 style: TextStyle(
                                   color: page.gradient[0],
-                                  fontSize: 12,
+                                  fontSize: 12.5,
                                   fontWeight: FontWeight.w800,
                                 ),
                               ),
@@ -330,13 +462,13 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                             height: 7,
                             decoration: BoxDecoration(
                               color: _currentPage == index
-                                  ? HawkarColors.primaryEmerald
+                                  ? HawkarColors.primaryMint
                                   : HawkarColors.surfaceBorder,
                               borderRadius: BorderRadius.circular(4),
                               boxShadow: _currentPage == index
                                   ? [
                                       BoxShadow(
-                                        color: HawkarColors.primaryEmerald.withOpacity(0.5),
+                                        color: HawkarColors.primaryMint.withOpacity(0.6),
                                         blurRadius: 8,
                                       ),
                                     ]
@@ -353,12 +485,12 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                         height: 54,
                         decoration: BoxDecoration(
                           gradient: _currentPage == _pages.length - 1
-                              ? HawkarColors.emeraldGradient
-                              : HawkarColors.emeraldMintGradient,
+                              ? HawkarColors.brandGradient
+                              : HawkarColors.brandGradient,
                           borderRadius: BorderRadius.circular(18),
                           boxShadow: [
                             BoxShadow(
-                              color: HawkarColors.primaryEmerald.withOpacity(0.4),
+                              color: HawkarColors.primaryMint.withOpacity(0.4),
                               blurRadius: 16,
                               offset: const Offset(0, 4),
                             ),
@@ -382,26 +514,15 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                               borderRadius: BorderRadius.circular(18),
                             ),
                           ),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Text(
-                                _currentPage == _pages.length - 1
-                                    ? KurdishStrings.getStarted
-                                    : KurdishStrings.next,
-                                style: const TextStyle(
-                                  color: Colors.black,
-                                  fontSize: 16,
-                                  fontWeight: FontWeight.w800,
-                                ),
-                              ),
-                              const SizedBox(width: 8),
-                              const Icon(
-                                Icons.arrow_back_ios_new_rounded,
-                                color: Colors.black,
-                                size: 16,
-                              ),
-                            ],
+                          child: Text(
+                            _currentPage == _pages.length - 1
+                                ? KurdishStrings.getStarted
+                                : KurdishStrings.next,
+                            style: const TextStyle(
+                              color: Colors.black,
+                              fontSize: 16.5,
+                              fontWeight: FontWeight.w900,
+                            ),
                           ),
                         ),
                       ),

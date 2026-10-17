@@ -52,40 +52,37 @@ class _FeedScreenState extends State<FeedScreen> {
               padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
               child: Row(
                 children: [
-                  // App Brand Symbol (Frosted Glass Badge)
+                  // App Brand Logo (Real Logo Image)
                   ClipRRect(
-                    borderRadius: BorderRadius.circular(14),
+                    borderRadius: BorderRadius.circular(12),
                     child: BackdropFilter(
                       filter: ImageFilter.blur(sigmaX: 12, sigmaY: 12),
                       child: Container(
-                        padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
+                        padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
                         decoration: BoxDecoration(
                           color: Colors.black.withOpacity(0.4),
-                          borderRadius: BorderRadius.circular(14),
+                          borderRadius: BorderRadius.circular(12),
                           border: Border.all(color: Colors.white.withOpacity(0.15), width: 0.8),
                         ),
                         child: Row(
                           mainAxisSize: MainAxisSize.min,
                           children: [
-                            Container(
-                              padding: const EdgeInsets.all(4),
-                              decoration: const BoxDecoration(
-                                color: HawkarColors.primaryEmerald,
-                                shape: BoxShape.circle,
-                              ),
-                              child: const Icon(
-                                Icons.handshake_rounded,
-                                color: Colors.black,
-                                size: 14,
+                            ClipRRect(
+                              borderRadius: BorderRadius.circular(7),
+                              child: Image.asset(
+                                'assets/images/logo.png',
+                                width: 24,
+                                height: 24,
+                                fit: BoxFit.cover,
                               ),
                             ),
-                            const SizedBox(width: 7),
+                            const SizedBox(width: 8),
                             const Text(
                               "هاوکار",
                               style: TextStyle(
-                                color: Colors.white,
+                                color: HawkarColors.logoChampagne,
                                 fontWeight: FontWeight.w900,
-                                fontSize: 14,
+                                fontSize: 14.5,
                                 letterSpacing: 0.5,
                               ),
                             ),

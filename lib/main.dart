@@ -85,15 +85,15 @@ class _MainNavigationShellState extends State<MainNavigationShell> {
       ),
       bottomNavigationBar: Container(
         decoration: BoxDecoration(
-          color: HawkarColors.surfaceDark.withOpacity(0.95),
-          border: const Border(
-            top: BorderSide(color: HawkarColors.surfaceBorder, width: 0.8),
+          color: HawkarColors.surfaceDark.withOpacity(0.96),
+          border: Border(
+            top: BorderSide(color: Colors.white.withOpacity(0.08), width: 0.8),
           ),
         ),
         child: SafeArea(
           top: false,
           child: Padding(
-            padding: const EdgeInsets.symmetric(vertical: 4),
+            padding: const EdgeInsets.symmetric(vertical: 6),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
@@ -114,22 +114,25 @@ class _MainNavigationShellState extends State<MainNavigationShell> {
     return GestureDetector(
       onTap: () => _onBottomNavTapped(2),
       child: Container(
-        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 7),
+        width: 44,
+        height: 44,
         decoration: BoxDecoration(
-          gradient: HawkarColors.emeraldGradient,
-          borderRadius: BorderRadius.circular(14),
+          gradient: HawkarColors.brandGradient,
+          shape: BoxShape.circle,
           boxShadow: [
             BoxShadow(
-              color: HawkarColors.primaryEmerald.withOpacity(0.45),
-              blurRadius: 10,
-              offset: const Offset(0, 2),
+              color: HawkarColors.primaryMint.withOpacity(0.45),
+              blurRadius: 12,
+              offset: const Offset(0, 3),
             ),
           ],
         ),
-        child: const Icon(
-          Icons.add_rounded,
-          color: Colors.black,
-          size: 22,
+        child: const Center(
+          child: Icon(
+            Icons.add_rounded,
+            color: Colors.black,
+            size: 26,
+          ),
         ),
       ),
     );
@@ -147,14 +150,14 @@ class _MainNavigationShellState extends State<MainNavigationShell> {
           children: [
             Icon(
               isSelected ? activeIcon : inactiveIcon,
-              color: isSelected ? HawkarColors.primaryEmerald : HawkarColors.textMuted,
+              color: isSelected ? HawkarColors.primaryMint : HawkarColors.textMuted,
               size: 24,
             ),
             const SizedBox(height: 3),
             Text(
               label,
               style: TextStyle(
-                color: isSelected ? HawkarColors.primaryEmerald : HawkarColors.textMuted,
+                color: isSelected ? HawkarColors.primaryMint : HawkarColors.textMuted,
                 fontSize: 10.5,
                 fontWeight: isSelected ? FontWeight.w800 : FontWeight.w500,
               ),
